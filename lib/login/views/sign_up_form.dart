@@ -23,7 +23,7 @@ class SignUpForm extends StatelessWidget {
               SizedBox(height: spacing),
               _buildPasswordField(),
               SizedBox(height: spacing),
-              _buildRepeatPasswordField(),
+              _buildConfirmPasswordField(),
               SizedBox(height: spacing),
               LoginButton(
                   AppStrings.signUpButton,
@@ -67,9 +67,9 @@ class SignUpForm extends StatelessWidget {
     );
   }
 
-  Widget _buildRepeatPasswordField() {
+  Widget _buildConfirmPasswordField() {
     return LoginFormField(
-        AppStrings.repeatPasswordFormFieldHint,
+        AppStrings.confirmPasswordFormFieldHint,
         (value) { },
         true,
         (value) {
