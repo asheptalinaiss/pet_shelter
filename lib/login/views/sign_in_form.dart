@@ -1,14 +1,16 @@
-import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:pet_shelter/login/services/login_validator.dart';
+import 'package:pet_shelter/login/models/sign_in_model.dart';
 import 'package:pet_shelter/login/views/components/login_button.dart';
 import 'package:pet_shelter/login/views/components/login_text_field.dart';
 import 'package:pet_shelter/constants/app_strings.dart';
 
 class SignInForm extends StatelessWidget {
-  final double spacing;
+  final SignInModel _signInModel;
+  final double _spacing;
   late final GlobalKey<FormState> _formKey;
 
-  SignInForm(this.spacing, {Key? key}) : super(key: key) {
+  SignInForm(this._signInModel, this._spacing, {Key? key}) : super(key: key) {
     _formKey = GlobalKey<FormState>();
   }
 
@@ -19,12 +21,16 @@ class SignInForm extends StatelessWidget {
       child: Column(
           children: [
             _buildEmailField(),
-            SizedBox(height: spacing),
+            SizedBox(height: _spacing),
             _buildPasswordField(),
-            SizedBox(height: spacing),
+            SizedBox(height: _spacing),
             LoginButton(
                 AppStrings.signInButton,
-                () { _formKey.currentState!.validate(); }
+                () {
+                  if (_formKey.currentState!.validate())  {
+                    _signInModel.signIn();
+                  }
+                }
             )
           ]
       )
@@ -34,16 +40,12 @@ class SignInForm extends StatelessWidget {
   Widget _buildEmailField() {
     return LoginFormField(
         AppStrings.emailFormFieldHint,
-        (value) { },
+        (value) {
+          _signInModel.onEmailChanged(value);
+        },
         false,
         (value) {
-          if (value == null || value.isEmpty) {
-            return AppStrings.emptyFieldError;
-          }
-          if (!EmailValidator.validate(value)) {
-            return AppStrings.emailFormatError;
-          }
-          return null;
+          return LoginValidator.validateEmail(value);
         }
     );
   }
@@ -51,13 +53,17 @@ class SignInForm extends StatelessWidget {
   Widget _buildPasswordField() {
     return LoginFormField(
         AppStrings.passwordFormFieldHint,
-        (value) { },
+        (value) {
+          _signInModel.onPasswordChanged(value);
+        },
         true,
         (value) {
-          if (value == null || value.isEmpty) {
-            return AppStrings.emptyFieldError;
+          final String? error = LoginValidator.validatePassword(value);
+          if (error != null) {
+            return error;
+          } else {
+            return _signInModel.signInError ? AppStrings.wrongPasswordError : null;
           }
-          return null;
         }
     );
   }

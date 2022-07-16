@@ -3,11 +3,14 @@ import 'package:flutter_svg/svg.dart';
 import 'package:pet_shelter/constants/app_assets.dart';
 import 'package:pet_shelter/constants/app_colors.dart';
 import 'package:pet_shelter/constants/app_strings.dart';
+import 'package:pet_shelter/login/models/sign_in_model.dart';
+import 'package:pet_shelter/login/models/sign_up_model.dart';
 import 'package:pet_shelter/login/ui_constants/login_style.dart';
 import 'package:pet_shelter/login/ui_constants/login_ui_constants.dart';
 import 'package:pet_shelter/login/views/components/login_later_button.dart';
 import 'package:pet_shelter/login/views/sign_in_form.dart';
 import 'package:pet_shelter/login/views/sign_up_form.dart';
+import 'package:provider/provider.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -100,8 +103,14 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
         child: TabBarView(
           controller: _tabController,
           children: [
-            _buildSignInView(screenWidth),
-            _buildSignUpView(screenWidth)
+            ChangeNotifierProvider(
+              create: (_) => SignInModel(),
+              child: _buildSignInView(screenWidth),
+            ),
+            ChangeNotifierProvider(
+              create: (_) => SignUpModel(),
+              child: _buildSignUpView(screenWidth)
+            )
           ],
         )
     );
@@ -110,7 +119,14 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
   Widget _buildSignInView(double screenWidth) {
     return Column(
       children: [
-        SignInForm(screenWidth * LoginUIConstants.formInnerPaddingCoeff),
+        Consumer<SignInModel>(
+            builder: (_, signInModel, child) {
+              return SignInForm(
+                  signInModel,
+                  screenWidth * LoginUIConstants.formInnerPaddingCoeff
+              );
+            }
+        ),
         SizedBox(height: screenWidth * LoginUIConstants.formOuterPaddingCoeff),
         _forgotPasswordButton()
       ],
@@ -118,7 +134,14 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
   }
 
   Widget _buildSignUpView(double screenWidth) {
-    return SignUpForm(screenWidth * LoginUIConstants.formInnerPaddingCoeff);
+    return Consumer<SignUpModel>(
+        builder: (_, signUpModel, child) {
+          return SignUpForm(
+              signUpModel,
+              screenWidth * LoginUIConstants.formInnerPaddingCoeff
+          );
+        }
+    );
   }
 
   Widget _forgotPasswordButton() {

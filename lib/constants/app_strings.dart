@@ -9,6 +9,8 @@ class AppStrings {
 
   static const String emailFormatError = "Неверный формат email. Пример: name@gmail.com";
   static const String emptyFieldError = "Поле не должно быть пустым";
+  static const String wrongPasswordError = "Неверная комбинация email адреса и пароля";
+  static const String differentPasswordsError = "Не совпадает с введенным паролем";
 
   static const String signInButton = "Войти";
   static const String signUpButton = "Зарегистрироваться";
