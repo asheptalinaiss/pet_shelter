@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:pet_shelter/services/basic_network_service.dart';
 
 class SignInModel extends ChangeNotifier {
   String _email = "";
   String _password = "";
+  final BasicNetworkService _networkService = GetIt.instance.get<BasicNetworkService>();
 
   bool signInError = false;
 
@@ -14,9 +17,14 @@ class SignInModel extends ChangeNotifier {
     _password = passwordValue;
   }
 
-  void signIn() {
-    // TODO: sign in
-    signInError = true;
-    notifyListeners();
+  Future<void> signIn() async {
+    try {
+      // TODO: sign in
+      await _networkService.healthCheck();
+    } catch(error) {
+      print("Network Service error: $error");
+      signInError = true;
+      notifyListeners();
+    }
   }
 }

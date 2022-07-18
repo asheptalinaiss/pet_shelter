@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:pet_shelter/login/views/login.dart';
+import 'package:pet_shelter/services/basic_network_service.dart';
+import 'package:pet_shelter/services/network_service.dart';
 
 void main() {
+  GetIt.instance.registerSingleton<BasicNetworkService>(NetworkService());
   runApp(const PetShelterApp());
 }
 
