@@ -7,6 +7,7 @@ import 'package:pet_shelter/login/ui_constants/login_style.dart';
 import 'package:pet_shelter/login/ui_constants/login_ui_constants.dart';
 import 'package:pet_shelter/login/views/components/login_later_button.dart';
 import 'package:pet_shelter/login/views/sign_in_form.dart';
+import 'package:pet_shelter/login/views/sign_up_form.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -117,7 +118,7 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
   }
 
   Widget _buildSignUpView(double screenWidth) {
-    return const Text("Registration");
+    return SignUpForm(screenWidth * LoginUIConstants.formInnerPaddingCoeff);
   }
 
   Widget _forgotPasswordButton() {
