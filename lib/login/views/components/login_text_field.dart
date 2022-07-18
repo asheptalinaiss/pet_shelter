@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:pet_shelter/constants/app_assets.dart';
 import 'package:pet_shelter/constants/app_colors.dart';
+import 'package:pet_shelter/constants/app_types.dart';
 
 class LoginFormField extends StatefulWidget {
   final String labelText;
-  final void Function(String value) onChanged;
-  final String? Function(String? value)? validator;
+  final StringCallback onChanged;
+  final ValidatorCallback? validator;
   final bool obscureText;
 
   const LoginFormField(this.labelText, this.onChanged, this.obscureText, this.validator, {Key? key})
