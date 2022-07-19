@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:pet_shelter/services/basic_network_service.dart';
 
 class SignInModel extends ChangeNotifier {
   String _email = "";
   String _password = "";
-  final BasicNetworkService _networkService = GetIt.instance.get<BasicNetworkService>();
+  final BasicNetworkService _networkService;
+
+  SignInModel(this._networkService);
 
   bool signInError = false;
 

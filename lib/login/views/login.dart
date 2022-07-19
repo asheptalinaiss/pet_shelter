@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get_it/get_it.dart';
 import 'package:pet_shelter/constants/app_assets.dart';
 import 'package:pet_shelter/constants/app_colors.dart';
 import 'package:pet_shelter/constants/app_strings.dart';
@@ -10,6 +11,7 @@ import 'package:pet_shelter/login/ui_constants/login_ui_constants.dart';
 import 'package:pet_shelter/login/views/components/login_later_button.dart';
 import 'package:pet_shelter/login/views/sign_in_form.dart';
 import 'package:pet_shelter/login/views/sign_up_form.dart';
+import 'package:pet_shelter/services/basic_network_service.dart';
 import 'package:provider/provider.dart';
 
 class Login extends StatefulWidget {
@@ -104,11 +106,11 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
           controller: _tabController,
           children: [
             ChangeNotifierProvider(
-              create: (_) => SignInModel(),
+              create: (_) => SignInModel(GetIt.instance.get<BasicNetworkService>()),
               child: _buildSignInView(screenWidth),
             ),
             ChangeNotifierProvider(
-              create: (_) => SignUpModel(),
+              create: (_) => SignUpModel(GetIt.instance.get<BasicNetworkService>()),
               child: _buildSignUpView(screenWidth)
             )
           ],

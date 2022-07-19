@@ -3,7 +3,7 @@ import 'package:pet_shelter/services/basic_network_service.dart';
 
 class NetworkService implements BasicNetworkService {
 
-  static const _baseAddress = "https://petsproject.issart.co/api/1.0.0";
+  static const _baseAddress = "https://petsproject.issart.com/api/1.0.0";
 
   @override
   Future<void> healthCheck() async {

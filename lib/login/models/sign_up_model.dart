@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:pet_shelter/services/basic_network_service.dart';
 
 class SignUpModel extends ChangeNotifier {
@@ -7,9 +6,11 @@ class SignUpModel extends ChangeNotifier {
   String _email = "";
   String _password = "";
   String _confirmPassword = "";
-  final BasicNetworkService _networkService = GetIt.instance.get<BasicNetworkService>();
+  final BasicNetworkService _networkService;
 
   String? get password => _password;
+
+  SignUpModel(this._networkService);
 
   void onNameChanged(String nameValue) {
     _name = nameValue;
