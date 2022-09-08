@@ -6,12 +6,13 @@ import 'package:pet_shelter/constants/app_types.dart';
 import 'package:pet_shelter/login/ui_constants/login_style.dart';
 
 class LoginFormField extends StatefulWidget {
+  final String? value;
   final String labelText;
   final StringCallback onChanged;
-  final ValidatorCallback? validator;
   final bool obscureText;
+  final String? errorText;
 
-  const LoginFormField(this.labelText, this.onChanged, this.obscureText, this.validator, {Key? key})
+  const LoginFormField(this.value, this.labelText, this.onChanged, this.obscureText, this.errorText, {Key? key})
       : super(key: key);
 
   @override
@@ -33,6 +34,7 @@ class _LoginFormFieldState extends State<LoginFormField> {
         )
       ]),
       child: TextFormField(
+        initialValue: widget.value,
         decoration: InputDecoration(
             hintText: widget.labelText,
             labelStyle: const TextStyle(
@@ -45,12 +47,11 @@ class _LoginFormFieldState extends State<LoginFormField> {
             fillColor: Colors.white,
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8.0),
-                borderSide: BorderSide.none
+                borderSide: widget.errorText == null
+                    ? BorderSide.none
+                    : const BorderSide(color: AppColors.error, width: 2)
             ),
-            errorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8.0),
-                borderSide: const BorderSide(color: AppColors.error)
-            ),
+            errorText: widget.errorText,
             errorStyle: LoginStyle.errorTextStyle,
             suffixIcon: widget.obscureText ? IconButton(
               icon: SvgPicture.asset(AppAssets.hidePasswordIcon),
@@ -61,7 +62,6 @@ class _LoginFormFieldState extends State<LoginFormField> {
         ),
         obscureText: widget.obscureText && _obscure,
         onChanged: widget.onChanged,
-        validator: widget.validator,
       ),
     );
   }

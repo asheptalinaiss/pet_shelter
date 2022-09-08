@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pet_shelter/login/services/login_validator.dart';
 import 'package:pet_shelter/login/states/sign_in_state.dart';
 import 'package:pet_shelter/login/ui_constants/login_style.dart';
 import 'package:pet_shelter/login/views/components/login_button.dart';
@@ -38,8 +37,7 @@ class SignInForm extends StatelessWidget {
               LoginButton(
                   AppStrings.signInButton,
                     () {
-                    // _signInState.clearError();
-                    if (_formKey.currentState!.validate())  {
+                      if (_formKey.currentState!.validate()) {
                       _signInState.signIn(
                           () {
                             Navigator.of(context)
@@ -54,11 +52,11 @@ class SignInForm extends StatelessWidget {
     );
   }
   Widget _buildErrorMessage() {
-    if (_signInState.errorMessage != null) {
+    if (_signInState.signInError != null) {
       return Padding(
         padding: EdgeInsets.fromLTRB(0, 0, 0, _spacing),
         child: Text(
-          _signInState.errorMessage!,
+          _signInState.signInError!,
           style: LoginStyle.errorTextStyle,
         ),
       );
@@ -69,33 +67,25 @@ class SignInForm extends StatelessWidget {
 
   Widget _buildEmailField() {
     return LoginFormField(
+        _signInState.email,
         AppStrings.emailFormFieldHint,
         (value) {
           _signInState.onEmailChanged(value);
-          // _signInState.clearError();
         },
         false,
-        (value) {
-          return LoginValidator.validateEmail(value);
-        }
+        _signInState.emailError
     );
   }
 
   Widget _buildPasswordField() {
     return LoginFormField(
+        _signInState.password,
         AppStrings.passwordFormFieldHint,
         (value) {
           _signInState.onPasswordChanged(value);
         },
         true,
-        (value) {
-          final String? error = LoginValidator.validatePassword(value);
-          if (error != null) {
-            return error;
-          } else {
-            return _signInState.errorMessage != null ? AppStrings.wrongPasswordError : null;
-          }
-        }
+        _signInState.passwordError
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pet_shelter/constants/app_strings.dart';
+import 'package:pet_shelter/login/services/login_validator.dart';
 import 'package:pet_shelter/models/sign_in_request/sign_in_request.dart';
 import 'package:pet_shelter/repository/local_storage.dart';
 import 'package:pet_shelter/services/basic_network_service.dart';
@@ -11,9 +12,15 @@ class SignInState extends ChangeNotifier {
   final BasicNetworkService _networkService;
   final LocalStorage _localStorage;
 
+  String? emailError;
+  String? passwordError;
+
+  String? signInError;
+
   SignInState(this._networkService, this._localStorage);
 
-  String? errorMessage;
+  String? get email => _email;
+  String? get password => _password;
 
   void onEmailChanged(String emailValue) {
     _email = emailValue;
@@ -24,6 +31,12 @@ class SignInState extends ChangeNotifier {
   }
 
   Future<void> signIn(VoidCallback onSuccess) async {
+    signInError = null;
+    if (!validateFields()) {
+      notifyListeners();
+      return;
+    }
+
     var result = await _networkService.signIn(
       SignInRequest(email: _email, password: _password)
     );
@@ -34,17 +47,18 @@ class SignInState extends ChangeNotifier {
         _localStorage.saveRefreshToken(result.body!.refreshToken);
         onSuccess();
       } else {
-        errorMessage = AppStrings.defaultErrorMessage;
+        signInError = AppStrings.defaultErrorMessage;
       }
     } else {
       // TODO: add handlers for different errors
-      errorMessage = AppStrings.defaultErrorMessage;
+      signInError = AppStrings.defaultErrorMessage;
       notifyListeners();
     }
   }
 
-  void clearError() {
-    errorMessage = null;
-    notifyListeners();
+  bool validateFields() {
+    emailError = LoginValidator.validateEmail(_email);
+    passwordError = LoginValidator.validatePassword(_password);
+    return emailError == null && passwordError == null;
   }
 }

@@ -19,8 +19,8 @@ class LoginValidator {
     return null;
   }
 
-  static String? validateName(String? password) {
-    if (password == null || password.isEmpty) {
+  static String? validateName(String? name) {
+    if (name == null || name.isEmpty) {
       return AppStrings.emptyFieldError;
     }
     return null;

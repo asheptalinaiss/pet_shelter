@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pet_shelter/constants/app_strings.dart';
-import 'package:pet_shelter/login/services/login_validator.dart';
 import 'package:pet_shelter/login/states/sign_up_state.dart';
 import 'package:pet_shelter/login/views/components/login_button.dart';
 import 'package:pet_shelter/login/views/components/login_text_field.dart';
@@ -49,53 +48,49 @@ class SignUpForm extends StatelessWidget {
 
   Widget _buildNameField() {
     return LoginFormField(
+        _signUpState.name,
         AppStrings.nameFormFieldHint,
         (value) { 
           _signUpState.onNameChanged(value);
         },
         false,
-        (value) {
-          return LoginValidator.validateName(value);
-        }
+        _signUpState.nameError
     );
   }
 
   Widget _buildEmailField() {
     return LoginFormField(
+        _signUpState.email,
         AppStrings.emailFormFieldHint,
         (value) { 
           _signUpState.onEmailChanged(value);
         },
         false,
-        (value) {
-          return LoginValidator.validateEmail(value);
-        }
+        _signUpState.emailError
     );
   }
 
   Widget _buildPasswordField() {
     return LoginFormField(
+        _signUpState.password,
         AppStrings.passwordFormFieldHint,
         (value) { 
           _signUpState.onPasswordChanged(value);
         },
         true,
-        (value) {
-          return LoginValidator.validatePassword(value);
-        }
+        _signUpState.passwordError
     );
   }
 
   Widget _buildConfirmPasswordField() {
     return LoginFormField(
+        _signUpState.confirmPassword,
         AppStrings.confirmPasswordFormFieldHint,
         (value) {
           _signUpState.onConfirmPasswordChanged(value);
         },
         true,
-        (value) {
-          return LoginValidator.validateConfirmPassword(_signUpState.password, value);
-        }
+        _signUpState.confirmPasswordError
     );
   }
 }
