@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pet_shelter/login/views/login.dart';
+import 'package:pet_shelter/repository/local_storage.dart';
+import 'package:pet_shelter/repository/shared_preferences_storage.dart';
 import 'package:pet_shelter/services/basic_network_service.dart';
-import 'package:pet_shelter/services/network_service.dart';
+import 'package:pet_shelter/services/http_network_service.dart';
 
-void main() {
-  GetIt.instance.registerSingleton<BasicNetworkService>(NetworkService());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final SharedPreferencesStorage localStorage = SharedPreferencesStorage();
+  await localStorage.init();
+  GetIt.instance.registerSingleton<LocalStorage>(localStorage);
+  GetIt.instance.registerSingleton<BasicNetworkService>(HttpNetworkService());
+
   runApp(const PetShelterApp());
 }
 

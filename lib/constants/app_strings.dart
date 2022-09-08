@@ -12,6 +12,8 @@ class AppStrings {
   static const String wrongPasswordError = "Неверная комбинация email адреса и пароля";
   static const String differentPasswordsError = "Не совпадает с введенным паролем";
 
+  static const String defaultErrorMessage = "Что-то пошло не так. Попробуйте позже.";
+
   static const String signInButton = "Войти";
   static const String signUpButton = "Зарегистрироваться";
   static const String forgotPassword = "Забыли пароль?";
