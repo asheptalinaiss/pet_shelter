@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pet_shelter/login/views/login.dart';
+import 'package:pet_shelter/main/views/main_screen.dart';
 import 'package:pet_shelter/repository/local_storage.dart';
 import 'package:pet_shelter/repository/shared_preferences_storage.dart';
 import 'package:pet_shelter/services/basic_network_service.dart';
@@ -22,9 +23,14 @@ class PetShelterApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'Pet Shelter',
-      home: Login()
+      home: _isAuthorized() ? const MainScreen() : const Login()
     );
+  }
+
+  bool _isAuthorized() {
+    return GetIt.instance.get<LocalStorage>().getAccessToken() != null
+        && GetIt.instance.get<LocalStorage>().getRefreshToken() != null;
   }
 }
