@@ -11,4 +11,6 @@ class AppAssets {
   static const String addAdIconUnselected = "assets/images/add_ad_icon_unselected.svg";
   static const String profileIconSelected = "assets/images/profile_icon_selected.svg";
   static const String profileIconUnselected = "assets/images/profile_icon_unselected.svg";
+
+  static const String addPhotoIcon = "assets/images/add_photo_icon.svg";
 }

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:pet_shelter/constants/app_assets.dart';
@@ -27,16 +28,14 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   Widget _buildBody() {
-    switch (_currentIndex) {
-      case 0:
-        return const Feed();
-      case 1:
-        return const AddAd();
-      case 2:
-        return const Profile();
-      default:
-        return const SizedBox.shrink();
-    }
+    return IndexedStack(
+      index: _currentIndex,
+      children: const [
+        Feed(),
+        AddAd(),
+        Profile()
+      ],
+    );
   }
 
   Widget _buildBottomBar() {

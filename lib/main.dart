@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:pet_shelter/login/views/login.dart';
 import 'package:pet_shelter/main/views/main_screen.dart';
 import 'package:pet_shelter/repository/local_storage.dart';
@@ -14,6 +15,7 @@ Future<void> main() async {
   await localStorage.init();
   GetIt.instance.registerSingleton<LocalStorage>(localStorage);
   GetIt.instance.registerSingleton<BasicNetworkService>(HttpNetworkService());
+  GetIt.instance.registerSingleton<ImagePicker>(ImagePicker());
 
   runApp(const PetShelterApp());
 }

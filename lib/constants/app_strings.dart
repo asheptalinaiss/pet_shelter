@@ -22,4 +22,11 @@ class AppStrings {
   static const String adsButton = "Объявления";
   static const String addAdButton = "Создать объявление";
   static const String profileButton = "Профиль";
+
+  static const String uploadPhotoHeader = "Загрузите фотографию";
+  static const String addPhotoButton = "Добавить фото";
+
+  static const String addAddressButton = "Указать адрес";
+  static const String confirmButton = "Подтвердить";
+  static const String createAdButton = "Разместить объявление";
 }

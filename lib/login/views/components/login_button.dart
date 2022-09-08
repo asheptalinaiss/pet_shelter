@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:pet_shelter/constants/app_assets.dart';
-import 'package:pet_shelter/constants/app_colors.dart';
+import 'package:pet_shelter/main/global_styles.dart';
 
 class LoginButton extends StatelessWidget {
   final String labelText;
@@ -13,19 +13,7 @@ class LoginButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: onPressedCallback,
-      style: ElevatedButton.styleFrom(
-          primary: AppColors.primary,
-          padding: const EdgeInsets.symmetric(vertical: 18.5, horizontal: 33),
-          textStyle: const TextStyle(
-              fontFamily: AppAssets.mulishFontFamily,
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: Colors.white
-          ),
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(8.0))
-        )
-      ),
+      style: GlobalStyles.elevatedButtonStyle,
       child: Wrap(
         spacing: 11,
         children: [
