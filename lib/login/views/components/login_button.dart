@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:pet_shelter/constants/app_assets.dart';
 import 'package:pet_shelter/main/global_styles.dart';
+import 'package:pet_shelter/main/global_ui_constants.dart';
 
 class LoginButton extends StatelessWidget {
   final String labelText;
@@ -15,7 +16,7 @@ class LoginButton extends StatelessWidget {
       onPressed: onPressedCallback,
       style: GlobalStyles.elevatedButtonStyle,
       child: Wrap(
-        spacing: 11,
+        spacing: GlobalUIConstants.buttonInnerPadding,
         children: [
           SvgPicture.asset(AppAssets.appMainIcon),
           Text(labelText)

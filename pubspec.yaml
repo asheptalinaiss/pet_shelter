@@ -43,6 +43,7 @@ dependencies:
   json_annotation: ^4.6.0
   shared_preferences: ^2.0.15
   image_picker: ^0.8.5+3
+  flutter_osm_plugin: ^0.39.1
 
 dev_dependencies:
   flutter_test:
