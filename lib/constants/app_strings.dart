@@ -29,4 +29,9 @@ class AppStrings {
   static const String addAddressButton = "Указать адрес";
   static const String confirmButton = "Подтвердить";
   static const String createAdButton = "Разместить объявление";
+
+  static const String allTab = "Все";
+  static const String catsTab = "Кошки";
+  static const String dogsTab = "Собаки";
+  static const String otherTab = "Другие";
 }

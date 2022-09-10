@@ -13,4 +13,7 @@ class AppAssets {
   static const String profileIconUnselected = "assets/images/profile_icon_unselected.svg";
 
   static const String addPhotoIcon = "assets/images/add_photo_icon.svg";
+
+  static const String placeholderImage = "assets/images/placeholder_image.svg";
+  static const String locationMarker = "assets/images/location_marker.svg";
 }
