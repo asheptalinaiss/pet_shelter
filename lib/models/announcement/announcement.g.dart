@@ -28,7 +28,7 @@ Map<String, dynamic> _$$_AnnouncementToJson(_$_Announcement instance) =>
     };
 
 const _$PetTypeEnumMap = {
-  PetType.Cat: 'cat',
-  PetType.Dog: 'dog',
-  PetType.Other: 'other',
+  PetType.cat: 'cat',
+  PetType.dog: 'dog',
+  PetType.other: 'other',
 };

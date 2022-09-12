@@ -13,10 +13,4 @@ class LoginStyle {
       )
   );
 
-  static TextStyle errorTextStyle = const TextStyle(
-      fontFamily: AppAssets.mulishFontFamily,
-      fontWeight: FontWeight.w400,
-      fontSize: 12,
-      color: AppColors.error
-  );
 }

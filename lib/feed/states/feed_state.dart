@@ -13,27 +13,28 @@ class FeedState extends ChangeNotifier {
 
   // FeedState({required BasicNetworkService networkService}) : _networkService = networkService;
   FeedState(this._networkService) {
-    getAds(() { });
+    getAds(null);
   }
 
   String? feedError;
 
   List<Announcement> get announcements => _announcements;
 
-  void onPetTypeChanged(PetType petType) {
+  void onPetTypeChanged(PetType? petType) {
     _petType = _petType;
-    getAds(() { });
+    getAds(petType);
   }
 
-  Future<void> getAds(VoidCallback onSuccess) async {
+  Future<void> getAds(PetType? petType) async {
     feedError = null;
+    _announcements = [];
+    notifyListeners();
 
-    var result = await _networkService.getAds();
+    var result = await _networkService.getAds(petType: petType);
 
     if (result.success) {
       if (result.body != null) {
         _announcements = result.body!;
-        onSuccess();
       } else {
         feedError = AppStrings.defaultErrorMessage;
       }

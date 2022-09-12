@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:pet_shelter/constants/app_strings.dart';
 import 'package:pet_shelter/login/states/sign_in_state.dart';
-import 'package:pet_shelter/login/ui_constants/login_style.dart';
 import 'package:pet_shelter/login/views/components/login_button.dart';
 import 'package:pet_shelter/login/views/components/login_text_field.dart';
-import 'package:pet_shelter/constants/app_strings.dart';
+import 'package:pet_shelter/main/global_styles.dart';
 import 'package:pet_shelter/main/views/main_screen.dart';
 
 class SignInForm extends StatelessWidget {
@@ -57,7 +57,7 @@ class SignInForm extends StatelessWidget {
         padding: EdgeInsets.fromLTRB(0, 0, 0, _spacing),
         child: Text(
           _signInState.signInError!,
-          style: LoginStyle.errorTextStyle,
+          style: GlobalStyles.errorTextStyle,
         ),
       );
     } else {

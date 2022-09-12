@@ -1,4 +1,5 @@
 import 'package:pet_shelter/models/announcement/announcement.dart';
+import 'package:pet_shelter/models/pet_type.dart';
 import 'package:pet_shelter/models/request_result.dart';
 import 'package:pet_shelter/models/sign_in_request/sign_in_request.dart';
 import 'package:pet_shelter/models/sign_up_request/sign_up_request.dart';
@@ -10,5 +11,5 @@ abstract class BasicNetworkService {
   Future<RequestResult<LoginResponse>> signUp(SignUpRequest request);
   Future<RequestResult<LoginResponse>> signIn(SignInRequest request);
 
-  Future<RequestResult<List<Announcement>>> getAds();
+  Future<RequestResult<List<Announcement>>> getAds({PetType? petType});
 }

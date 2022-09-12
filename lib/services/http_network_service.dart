@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:pet_shelter/models/announcement/announcement.dart';
+import 'package:pet_shelter/models/pet_type.dart';
 import 'package:pet_shelter/models/request_result.dart';
 import 'package:pet_shelter/models/sign_in_request/sign_in_request.dart';
 import 'package:pet_shelter/models/sign_up_request/sign_up_request.dart';
@@ -48,10 +49,10 @@ class HttpNetworkService implements BasicNetworkService {
   }
 
   @override
-  Future<RequestResult<List<Announcement>>> getAds() {
+  Future<RequestResult<List<Announcement>>> getAds({PetType? petType}) {
     return _get(
         "announcements",
-        {},
+        petType == null ? {} : {"petType": petType.name},
         (responseBody) {
           Iterable list = json.decode(responseBody);
           return list.map((model) => Announcement.fromJson(model)).toList();

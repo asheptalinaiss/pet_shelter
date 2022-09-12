@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:pet_shelter/constants/app_assets.dart';
 import 'package:pet_shelter/constants/app_colors.dart';
 import 'package:pet_shelter/constants/app_types.dart';
-import 'package:pet_shelter/login/ui_constants/login_style.dart';
+import 'package:pet_shelter/main/global_styles.dart';
 
 class LoginFormField extends StatefulWidget {
   final String? value;
@@ -52,7 +52,7 @@ class _LoginFormFieldState extends State<LoginFormField> {
                     : const BorderSide(color: AppColors.error, width: 2)
             ),
             errorText: widget.errorText,
-            errorStyle: LoginStyle.errorTextStyle,
+            errorStyle: GlobalStyles.errorTextStyle,
             suffixIcon: widget.obscureText ? IconButton(
               icon: SvgPicture.asset(AppAssets.hidePasswordIcon),
               onPressed: () {
