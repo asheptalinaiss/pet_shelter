@@ -13,17 +13,11 @@ class LoginValidator {
   }
 
   static String? validatePassword(String? password) {
-    if (password == null || password.isEmpty) {
-      return AppStrings.emptyFieldError;
-    }
-    return null;
+    return password == null || password.isEmpty ? AppStrings.emptyFieldError : null;
   }
 
   static String? validateName(String? name) {
-    if (name == null || name.isEmpty) {
-      return AppStrings.emptyFieldError;
-    }
-    return null;
+    return name == null || name.isEmpty ? AppStrings.emptyFieldError : null;
   }
 
   static String? validateConfirmPassword(String? password, String? confirmPassword) {
