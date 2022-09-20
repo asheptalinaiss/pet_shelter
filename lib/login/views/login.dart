@@ -4,13 +4,14 @@ import 'package:get_it/get_it.dart';
 import 'package:pet_shelter/constants/app_assets.dart';
 import 'package:pet_shelter/constants/app_colors.dart';
 import 'package:pet_shelter/constants/app_strings.dart';
-import 'package:pet_shelter/login/models/sign_in_model.dart';
-import 'package:pet_shelter/login/models/sign_up_model.dart';
+import 'package:pet_shelter/login/states/sign_in_state.dart';
+import 'package:pet_shelter/login/states/sign_up_state.dart';
 import 'package:pet_shelter/login/ui_constants/login_style.dart';
 import 'package:pet_shelter/login/ui_constants/login_ui_constants.dart';
 import 'package:pet_shelter/login/views/components/login_later_button.dart';
 import 'package:pet_shelter/login/views/sign_in_form.dart';
 import 'package:pet_shelter/login/views/sign_up_form.dart';
+import 'package:pet_shelter/repository/local_storage.dart';
 import 'package:pet_shelter/services/basic_network_service.dart';
 import 'package:provider/provider.dart';
 
@@ -45,15 +46,19 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
             vertical: screenWidth * LoginUIConstants.verticalPaddingCoeff,
             horizontal: screenWidth * LoginUIConstants.horizontalPaddingCoeff
         ),
-        child: Column(
-            children: [
-              _buildLogoView(screenWidth * LoginUIConstants.logoWithCoeff),
-              SizedBox(height: screenWidth * LoginUIConstants.logoBottomPaddingCoeff),
-              _buildTabBar(screenWidth),
-              SizedBox(height: screenWidth * LoginUIConstants.formOuterPaddingCoeff),
-              _buildTabView(screenWidth),
-              LoginLaterButton(() { })
-            ]
+        child: Stack(
+          children: [
+            Column(
+                children: [
+                  _buildLogoView(screenWidth * LoginUIConstants.logoWithCoeff),
+                  SizedBox(height: screenWidth * LoginUIConstants.logoBottomPaddingCoeff),
+                  _buildTabBar(screenWidth),
+                  SizedBox(height: screenWidth * LoginUIConstants.formOuterPaddingCoeff),
+                  _buildTabView(screenWidth),
+                  LoginLaterButton(() { })
+                ]
+            )
+          ],
         )
       )
     );
@@ -106,11 +111,17 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
           controller: _tabController,
           children: [
             ChangeNotifierProvider(
-              create: (_) => SignInModel(GetIt.instance.get<BasicNetworkService>()),
+              create: (_) => SignInState(
+                GetIt.instance.get<BasicNetworkService>(),
+                GetIt.instance.get<LocalStorage>()
+              ),
               child: _buildSignInView(screenWidth),
             ),
             ChangeNotifierProvider(
-              create: (_) => SignUpModel(GetIt.instance.get<BasicNetworkService>()),
+              create: (_) => SignUpState(
+                GetIt.instance.get<BasicNetworkService>(),
+                GetIt.instance.get<LocalStorage>()
+              ),
               child: _buildSignUpView(screenWidth)
             )
           ],
@@ -121,10 +132,10 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
   Widget _buildSignInView(double screenWidth) {
     return Column(
       children: [
-        Consumer<SignInModel>(
-            builder: (_, signInModel, child) {
+        Consumer<SignInState>(
+            builder: (_, signInState, child) {
               return SignInForm(
-                  signInModel,
+                  signInState,
                   screenWidth * LoginUIConstants.formInnerPaddingCoeff
               );
             }
@@ -136,10 +147,10 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
   }
 
   Widget _buildSignUpView(double screenWidth) {
-    return Consumer<SignUpModel>(
-        builder: (_, signUpModel, child) {
+    return Consumer<SignUpState>(
+        builder: (_, signUpState, child) {
           return SignUpForm(
-              signUpModel,
+              signUpState,
               screenWidth * LoginUIConstants.formInnerPaddingCoeff
           );
         }
