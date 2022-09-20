@@ -41,7 +41,7 @@ class SignInForm extends StatelessWidget {
                       _signInState.signIn(
                           () {
                             Navigator.of(context)
-                                .push(MaterialPageRoute(builder: (context) => const MainScreenView()));
+                                .push(MaterialPageRoute(builder: (context) => const MainScreen()));
                           }
                       );
                     }

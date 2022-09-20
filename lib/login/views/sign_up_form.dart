@@ -35,7 +35,7 @@ class SignUpForm extends StatelessWidget {
                       _signUpState.signUp(
                           () {
                             Navigator.of(context)
-                                .push(MaterialPageRoute(builder: (context) => const MainScreenView()));
+                                .push(MaterialPageRoute(builder: (context) => const MainScreen()));
                           }
                       );
                     }

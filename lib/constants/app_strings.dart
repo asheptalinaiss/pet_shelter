@@ -18,4 +18,8 @@ class AppStrings {
   static const String signUpButton = "Зарегистрироваться";
   static const String forgotPassword = "Забыли пароль?";
   static const String logInLaterButton = "Войти позже";
+
+  static const String adsButton = "Объявления";
+  static const String addAdButton = "Создать объявление";
+  static const String profileButton = "Профиль";
 }

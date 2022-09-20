@@ -11,6 +11,7 @@ import 'package:pet_shelter/login/ui_constants/login_ui_constants.dart';
 import 'package:pet_shelter/login/views/components/login_later_button.dart';
 import 'package:pet_shelter/login/views/sign_in_form.dart';
 import 'package:pet_shelter/login/views/sign_up_form.dart';
+import 'package:pet_shelter/main/views/main_screen.dart';
 import 'package:pet_shelter/repository/local_storage.dart';
 import 'package:pet_shelter/services/basic_network_service.dart';
 import 'package:provider/provider.dart';
@@ -46,19 +47,18 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
             vertical: screenWidth * LoginUIConstants.verticalPaddingCoeff,
             horizontal: screenWidth * LoginUIConstants.horizontalPaddingCoeff
         ),
-        child: Stack(
-          children: [
-            Column(
-                children: [
-                  _buildLogoView(screenWidth * LoginUIConstants.logoWithCoeff),
-                  SizedBox(height: screenWidth * LoginUIConstants.logoBottomPaddingCoeff),
-                  _buildTabBar(screenWidth),
-                  SizedBox(height: screenWidth * LoginUIConstants.formOuterPaddingCoeff),
-                  _buildTabView(screenWidth),
-                  LoginLaterButton(() { })
-                ]
-            )
-          ],
+        child: Column(
+            children: [
+              _buildLogoView(screenWidth * LoginUIConstants.logoWithCoeff),
+              SizedBox(height: screenWidth * LoginUIConstants.logoBottomPaddingCoeff),
+              _buildTabBar(screenWidth),
+              SizedBox(height: screenWidth * LoginUIConstants.formOuterPaddingCoeff),
+              _buildTabView(screenWidth),
+              LoginLaterButton(() {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => const MainScreen()));
+              })
+            ]
         )
       )
     );
