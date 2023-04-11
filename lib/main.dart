@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:pet_shelter/login/views/login.dart';
-import 'package:pet_shelter/main/views/main_screen.dart';
+import 'package:pet_shelter/states/app_state.dart';
+import 'package:pet_shelter/navigation/routes.dart';
 import 'package:pet_shelter/repository/local_storage.dart';
 import 'package:pet_shelter/repository/shared_preferences_storage.dart';
 import 'package:pet_shelter/services/basic_network_service.dart';
 import 'package:pet_shelter/services/http_network_service.dart';
+import 'package:provider/provider.dart';
+import 'package:routemaster/routemaster.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,14 +27,23 @@ class PetShelterApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Pet Shelter',
-      home: _isAuthorized() ? const MainScreen() : const Login()
-    );
-  }
 
-  bool _isAuthorized() {
-    return GetIt.instance.get<LocalStorage>().getAccessToken() != null
-        && GetIt.instance.get<LocalStorage>().getRefreshToken() != null;
+    return ChangeNotifierProvider<AppState>(
+        create: (_) => AppState(GetIt.instance.get<LocalStorage>()),
+        child: Consumer<AppState>(builder:(_, value, child) {
+          return MaterialApp.router(
+              title: 'Pet Shelter',
+              theme: ThemeData(primarySwatch: Colors.blue),
+              routeInformationParser: const RoutemasterParser(),
+              routerDelegate: RoutemasterDelegate(
+                  routesBuilder: ((BuildContext delegateContext) {
+                    return Provider.of<AppState>(delegateContext).isAuthorized()
+                        ? Routes.authorizedRouteMap
+                        : Routes.unauthorizedRouteMap;
+                  })
+              )
+          );
+        })
+    );
   }
 }

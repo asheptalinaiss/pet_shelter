@@ -6,4 +6,5 @@ class AppColors {
   static const Color blackText = Color(0xFF001829);
 
   static const Color error = Color(0xFFD81852);
+  static const Color accent = Color(0xFFE9AC5C);
 }

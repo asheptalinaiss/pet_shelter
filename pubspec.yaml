@@ -42,9 +42,10 @@ dependencies:
   freezed_annotation: ^2.1.0
   json_annotation: ^4.6.0
   shared_preferences: ^2.0.15
-  image_picker: ^0.8.5+3
-  flutter_osm_plugin: ^0.39.1
   cached_network_image: ^3.2.1
+  image_picker: ^0.8.5+3
+  routemaster: ^1.0.1
+  flutter_osm_plugin: ^0.42.0
 
 dev_dependencies:
   flutter_test:
@@ -73,6 +74,8 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/images/bottom_bar/
+    - assets/images/pet_type/
 
   fonts:
     - family: Mulish

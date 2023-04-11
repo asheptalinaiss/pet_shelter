@@ -1,19 +1,29 @@
 class AppAssets {
-  static const String mulishFontFamily = "Mulish";
+  static const mulishFontFamily = "Mulish";
 
-  static const String appLogo = "assets/images/app_logo.svg";
-  static const String appMainIcon = "assets/images/app_main_icon.svg";
-  static const String hidePasswordIcon = "assets/images/hide_password_icon.svg";
+  static const appLogo = "assets/images/app_logo.svg";
+  static const appMainIcon = "assets/images/app_main_icon.svg";
+  static const hidePasswordIcon = "assets/images/hide_password_icon.svg";
 
-  static const String adsIconSelected = "assets/images/ads_icon_selected.svg";
-  static const String adsIconUnelected = "assets/images/ads_icon_unselected.svg";
-  static const String addAdIconSelected = "assets/images/add_ad_icon_selected.svg";
-  static const String addAdIconUnselected = "assets/images/add_ad_icon_unselected.svg";
-  static const String profileIconSelected = "assets/images/profile_icon_selected.svg";
-  static const String profileIconUnselected = "assets/images/profile_icon_unselected.svg";
+  // Bottom bar
+  static const feedSelectedIcon = "assets/images/bottom_bar/feed_selected_icon.svg";
+  static const feedUnelectedIcon = "assets/images/bottom_bar/feed_unselected_icon.svg";
+  static const createAdSelectedIcon = "assets/images/bottom_bar/create_ad_selected_icon.svg";
+  static const createAdUnselectedIcon = "assets/images/bottom_bar/create_ad_unselected_icon.svg";
+  static const profileSelectedIcon = "assets/images/bottom_bar/profile_selected_icon.svg";
+  static const profileUnselectedIcon = "assets/images/bottom_bar/profile_unselected_icon.svg";
 
-  static const String addPhotoIcon = "assets/images/add_photo_icon.svg";
+  static const backIcon = "assets/images/back_icon.svg";
+  static const checkMarkIcon = "assets/images/check_mark_icon.svg";
 
-  static const String placeholderImage = "assets/images/placeholder_image.svg";
-  static const String locationMarker = "assets/images/location_marker.svg";
+  static const photoIcon = "assets/images/photo_icon.svg";
+  static const galleryIcon = "assets/images/gallery_icon.svg";
+
+  static const placeholderImage = "assets/images/placeholder_image.svg";
+  static const locationMarker = "assets/images/location_marker.svg";
+
+  // Pet types icons
+  static const petTypeCatIcon = "assets/images/pet_type/cat_icon.svg";
+  static const petTypeDogIcon = "assets/images/pet_type/dog_icon.svg";
+  static const petTypeBunnyIcon = "assets/images/pet_type/bunny_icon.svg";
 }

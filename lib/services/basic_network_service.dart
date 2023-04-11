@@ -12,4 +12,5 @@ abstract class BasicNetworkService {
   Future<RequestResult<LoginResponse>> signIn(SignInRequest request);
 
   Future<RequestResult<List<Announcement>>> getAds({PetType? petType});
+  Future<RequestResult<List<Announcement>>> createAd(String accessToken, Announcement announcement);
 }
